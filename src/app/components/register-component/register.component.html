@@ -1,0 +1,43 @@
+<!-- <div class="toolbar" role="banner">
+
+  </div> -->
+
+
+  <!-- <input id="nome" name="nome" class="form-control"
+      required minlength="3"
+      [(ngModel)]="azienda.nome" #name="ngModel" >
+
+<div *ngIf="name.invalid && (name.dirty || name.touched)"
+    class="alert alert-danger">
+
+  <div *ngIf="name.errors.required">
+    Name is required.
+  </div>
+  <div *ngIf="name.errors.minlength">
+    Name must be at least 4 characters long.
+  </div>
+  <div *ngIf="name.errors.forbiddenName">
+    Name cannot be Bob.
+  </div>
+
+</div> -->
+<!-- 
+<label for="nome">Name</label>
+<input type="text" class="form-control" id="nome"
+       required minlength="3"
+       [(ngModel)]="azienda.nome" name="nome"
+       #name="ngModel">
+<div [hidden]="name.valid || name.pristine"
+     class="alert alert-danger">
+  Name is required
+</div> -->
+
+<label for="name">Name</label>
+<input type="text" class="form-control" id="name"
+       required
+       [(ngModel)]="azienda.nome" name="name"
+       #name="ngModel">
+<div [hidden]="azienda.nome"
+     class="alert alert-danger">
+  Name is required
+</div>
