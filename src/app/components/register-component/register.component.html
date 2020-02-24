@@ -1,43 +1,42 @@
-<!-- <div class="toolbar" role="banner">
+<div class="container">
+  <h1>Registra azienda</h1>
+    <div class="form-group">
+      <label for="nome">Nome</label>
+      <input type="text" class="form-control" id="nome" required min="3" [(ngModel)]="azienda.nome" (onChange)="verificaNome()">
+      <div [hidden]="!errName" class="alert alert-danger">Il nome è obbligatorio</div>
 
-  </div> -->
+    </div>
+
+    <label for="categorie">Categorie</label>
+    <div class="form-group">
+      <p-multiSelect id="categorie" [options]="categorie" [(ngModel)]="azienda.categorie" [panelStyle]="{minWidth:'10em'}"
+      (onChange)="verificaCategorie()" defaultLabel="Scegli categorie " selectedItemsLabel="{0} elementi selezionati"></p-multiSelect>
+      
+      <p>Categorie selezionate: {{azienda.categorie}}</p> 
+      <div [hidden]="!errCat" class="alert alert-danger">Scegli almeno una categoria</div>
+
+    </div>
 
 
-  <!-- <input id="nome" name="nome" class="form-control"
-      required minlength="3"
-      [(ngModel)]="azienda.nome" #name="ngModel" >
+    <label for="prodotti">Prodotti</label>
+    <div class="form-group">
+      <p-multiSelect id="prodotti" [options]="prodotti" [(ngModel)]="azienda.prodotti" [panelStyle]="{minWidth:'10em'}" 
+      (onChange)="verificaProdotti()" defaultLabel="Scegli prodotti" selectedItemsLabel="{0} elementi selezionati"></p-multiSelect>
+      
+      <p>Prodotti selezionati: {{azienda.prodotti}}</p> 
 
-<div *ngIf="name.invalid && (name.dirty || name.touched)"
-    class="alert alert-danger">
+    </div>
 
-  <div *ngIf="name.errors.required">
-    Name is required.
-  </div>
-  <div *ngIf="name.errors.minlength">
-    Name must be at least 4 characters long.
-  </div>
-  <div *ngIf="name.errors.forbiddenName">
-    Name cannot be Bob.
-  </div>
+    <label for="servizi">Servizi</label>
+    <div class="form-group">
+      <p-multiSelect id="servizi" [options]="servizi" [(ngModel)]="azienda.servizi" [panelStyle]="{minWidth:'10em'}" 
+      (onChange)="verificaServizi()" defaultLabel="Scegli servizi" selectedItemsLabel="{0} elementi selezionati"></p-multiSelect>
+      
+      <p>Servizi selezionati: {{azienda.servizi}}</p> 
+    </div>
 
-</div> -->
-<!-- 
-<label for="nome">Name</label>
-<input type="text" class="form-control" id="nome"
-       required minlength="3"
-       [(ngModel)]="azienda.nome" name="nome"
-       #name="ngModel">
-<div [hidden]="name.valid || name.pristine"
-     class="alert alert-danger">
-  Name is required
-</div> -->
+    <div [hidden]="!errProdServ" class="alert alert-danger">Scegli almeno un prodotto o un servizio</div>
 
-<label for="name">Name</label>
-<input type="text" class="form-control" id="name"
-       required
-       [(ngModel)]="azienda.nome" name="name"
-       #name="ngModel">
-<div [hidden]="azienda.nome"
-     class="alert alert-danger">
-  Name is required
+    <button class="btn btn-success" (click)="submit()">Submit</button>
+
 </div>

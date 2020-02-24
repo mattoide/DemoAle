@@ -9,23 +9,13 @@ import { RegisterComponent } from './components/register-component/register.comp
 
 import { ReactiveFormsModule } from '@angular/forms';
 import { FormsModule } from '@angular/forms';
-import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
-
-import { AlertCustomComponentComponent } from './components/alert-custom-component/alert-custom-component.component';
-
-
-
-
-
-
-
+import {MultiSelectModule} from 'primeng/multiselect';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     RegisterComponent,
-     AlertCustomComponentComponent
   ],
   imports: [
     BrowserModule,
@@ -33,7 +23,7 @@ import { AlertCustomComponentComponent } from './components/alert-custom-compone
     BrowserAnimationsModule,
     ReactiveFormsModule,
     FormsModule,
-    // NgbModule
+    MultiSelectModule
   
   ],
   providers: [],

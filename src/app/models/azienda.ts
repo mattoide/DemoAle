@@ -1,7 +1,8 @@
 export class Azienda {
     nome:string
-    settori:string[]
+    categorie:string[]
     prodotti:string[]
+    servizi:string[]
     constructor() {
     }
 }
