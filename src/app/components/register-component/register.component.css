@@ -11,6 +11,13 @@
     font-weight: 600;
   }
 
+  .labels {
+    font-weight: bold;
+  }
+
+  .custom-selected{
+    padding-right: 0;
+  }
     /*.ng-valid[required], .ng-valid.required  {
     border-left: 5px solid #42A948; 
   }*/

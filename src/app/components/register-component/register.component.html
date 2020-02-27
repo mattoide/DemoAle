@@ -1,42 +1,97 @@
 <div class="container">
-  <h1>Registra azienda</h1>
-    <div class="form-group">
-      <label for="nome">Nome</label>
-      <input type="text" class="form-control" id="nome" required min="3" [(ngModel)]="azienda.nome" (onChange)="verificaNome()">
-      <div [hidden]="!errName" class="alert alert-danger">Il nome è obbligatorio</div>
 
+  <h3>Registra azienda</h3>
+
+  <div class="container" style="padding: 5%; background-color: whitesmoke; border-style: solid;">
+    <div class="form-group">
+      <label for="nome" class="labels">Nome</label>
+      <input type="text" class="form-control" id="nome" required min="3" [(ngModel)]="azienda.nome"
+        (change)="verificaNome()">
+      <div [hidden]="errName == null" class="alert alert-danger">{{errName}}</div>
     </div>
 
-    <label for="categorie">Categorie</label>
+    <div class="row">
+      <div class="col-sm-2 form-group">
+        <label for="toponimo" class="labels">Toponimo</label>
+        <select class="form-control" id="toponimo" [(ngModel)]="azienda.toponimo">
+          <option *ngFor="let top of toponimi" [value]="top">{{top}}</option>
+          <!-- <div [hidden]="errTop == null" class="alert alert-danger">{{errInd}}</div> -->
+        </select>
+      </div>
+
+      <div class="col-sm-3 form-group">
+        <label for="indirizzo" class="labels">Indirizzo</label>
+        <input type="text" class="form-control" id="indirizzo" required [(ngModel)]="azienda.indirizzo"
+          (change)="verificaIndirizzo()">
+        <!-- <div [hidden]="errInd == null" class="alert alert-danger">{{errInd}}</div> -->
+      </div>
+
+      <div class="col-sm-2 form-group">
+        <label for="civico" class="labels">Numero Civico</label>
+        <input type="number" min="0" class="form-control" id="civico" required [(ngModel)]="azienda.civico">
+        <!-- <div [hidden]="errCiv == null" class="alert alert-danger">{{errCiv}}</div> -->
+      </div>
+    </div>
+
+    <div [hidden]="errInd == null" class="alert alert-danger">{{errInd}}</div>
+
+
+    <hr class="solid">
+
+    <label for="categorie" class="labels">Categorie</label>
     <div class="form-group">
-      <p-multiSelect id="categorie" [options]="categorie" [(ngModel)]="azienda.categorie" [panelStyle]="{minWidth:'10em'}"
-      (onChange)="verificaCategorie()" defaultLabel="Scegli categorie " selectedItemsLabel="{0} elementi selezionati"></p-multiSelect>
-      
-      <p>Categorie selezionate: {{azienda.categorie}}</p> 
+      <p-multiSelect id="categorie" [options]="categorie" [(ngModel)]="azienda.categorie"
+        [panelStyle]="{minWidth:'10em'}" (onChange)="verificaCategorie()" defaultLabel="Scegli categorie "
+        selectedItemsLabel="{0} elementi selezionati" emptyFilterMessage="Nessun risultato"></p-multiSelect>
+
+      <div class="row">
+        <div *ngFor="let cat of azienda.categorie">
+          <span class="container custom-selected"> <button class="btn btn-danger" style="margin-top: 3%;"
+              (click)="rimuoviCategoria(cat)">{{cat}}</button></span>
+        </div>
+      </div>
       <div [hidden]="!errCat" class="alert alert-danger">Scegli almeno una categoria</div>
-
     </div>
 
+    <hr class="solid">
 
-    <label for="prodotti">Prodotti</label>
+    <label for="prodotti" class="labels">Prodotti</label>
     <div class="form-group">
-      <p-multiSelect id="prodotti" [options]="prodotti" [(ngModel)]="azienda.prodotti" [panelStyle]="{minWidth:'10em'}" 
-      (onChange)="verificaProdotti()" defaultLabel="Scegli prodotti" selectedItemsLabel="{0} elementi selezionati"></p-multiSelect>
-      
-      <p>Prodotti selezionati: {{azienda.prodotti}}</p> 
+      <p-multiSelect id="prodotti" [options]="prodotti" [(ngModel)]="azienda.prodotti" [panelStyle]="{minWidth:'10em'}"
+        (onChange)="verificaProdotti()" defaultLabel="Scegli prodotti" selectedItemsLabel="{0} elementi selezionati"
+        emptyFilterMessage="Nessun risultato"></p-multiSelect>
 
+      <div class="row">
+        <div *ngFor="let prod of azienda.prodotti">
+          <span class="container custom-selected"> <button class="btn btn-danger"
+              (click)="rimuoviProdotto(prod)">{{prod}}</button></span>
+        </div>
+      </div>
     </div>
 
-    <label for="servizi">Servizi</label>
+    <hr class="solid">
+
+
+    <label for="servizi" class="labels">Servizi</label>
     <div class="form-group">
-      <p-multiSelect id="servizi" [options]="servizi" [(ngModel)]="azienda.servizi" [panelStyle]="{minWidth:'10em'}" 
-      (onChange)="verificaServizi()" defaultLabel="Scegli servizi" selectedItemsLabel="{0} elementi selezionati"></p-multiSelect>
-      
-      <p>Servizi selezionati: {{azienda.servizi}}</p> 
+      <p-multiSelect id="servizi" [options]="servizi" [(ngModel)]="azienda.servizi" [panelStyle]="{minWidth:'10em'}"
+        (onChange)="verificaServizi()" defaultLabel="Scegli servizi" selectedItemsLabel="{0} elementi selezionati"
+        emptyFilterMessage="Nessun risultato"></p-multiSelect>
+
+      <div class="row">
+        <div *ngFor="let serv of azienda.servizi">
+          <span class="container custom-selected"> <button class="btn btn-danger"
+              (click)="rimuoviServizio(serv)">{{serv}}</button></span>
+        </div>
+      </div>
     </div>
 
     <div [hidden]="!errProdServ" class="alert alert-danger">Scegli almeno un prodotto o un servizio</div>
+  </div>
 
-    <button class="btn btn-success" (click)="submit()">Submit</button>
+
+  <button class="btn btn-success" style="margin-top: 2%;" (click)="submit()">Registra</button>
+  <p-toast></p-toast>
+
 
 </div>
