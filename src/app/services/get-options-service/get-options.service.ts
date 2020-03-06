@@ -26,9 +26,4 @@ export class GetOptionsService {
     return this.http.get(api.getToponimi);
   }
 
-
-  Az(filtri): Observable<any> {
-    return this.http.post("http://localhost:3000/aziende/cercaAziendaByCatProdServ", {filtri:filtri});
-  }
-
 }

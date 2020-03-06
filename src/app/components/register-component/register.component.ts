@@ -95,15 +95,6 @@ export class RegisterComponent implements OnInit {
       }
     )
 
-    let filtri = {categorie:["Fast Food", "Gelateria"], prodotti:["Pizza"], servizi:["Consegna a domicilio"]};
-
-    this.getOptionsService.Az(filtri).subscribe(res=>{
-      console.log(res)
-
-    }, err =>{
-      console.log(err)
-    })
-
   }
 
   verificaNome() {
