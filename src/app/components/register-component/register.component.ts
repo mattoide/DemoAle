@@ -28,13 +28,17 @@ export class RegisterComponent implements OnInit {
   servizi = [];
   toponimi = [];
 
-  errName = null;
+  errRagSoc = null;
+  errMail = null;
+  errProv = null;
+  errCap = null;
   errTop = null;
   errInd = null;
   errCiv = null;
   errCat = false;
   errProd = false;
   errServ = false;
+  errTime = null;
 
   errProdServ = false;
 
@@ -97,8 +101,12 @@ export class RegisterComponent implements OnInit {
 
   }
 
-  verificaNome() {
-    !this.azienda.nome ? this.errName = "Il nome è obbligatorio" : this.azienda.nome.length < 3 ? this.errName = "Il nome deve essere composto da almeno 3 caratteri" : this.errName = null;
+  verificaRagioneSociale() {
+    !this.azienda.ragioneSociale ? this.errRagSoc = "La Ragione Sociale è obbligatoria" : this.azienda.ragioneSociale.length < 3 ? this.errRagSoc = "La Ragione Sociale deve essere composta da almeno 3 caratteri" : this.errRagSoc = null;
+  }
+
+  verificaEmail() {
+    !this.azienda.email ? this.errMail = "L' Email è obbligatoria" : this.errMail = null;
   }
 
 
@@ -112,6 +120,18 @@ export class RegisterComponent implements OnInit {
   
   verificaCivico() {
     !this.azienda.civico ? this.errInd = "Completa l'indirizzo" : this.errInd = null;
+  }
+
+  verificaProvincia() {
+    !this.azienda.provincia ? this.errInd = "Completa l'indirizzo" : this.errInd = null;
+  }
+
+  verificaCap() {
+    !this.azienda.cap ? this.errInd = "Completa l'indirizzo" : this.errInd = null;
+  }
+
+  verificaIndirizzoCompleto() {
+    !this.azienda.toponimo || !this.azienda.indirizzo || !this.azienda.civico || !this.azienda.provincia || !this.azienda.cap ? this.errInd = "Completa l'indirizzo" : this.errInd = null;
   }
 
   verificaCategorie() {
@@ -129,17 +149,24 @@ export class RegisterComponent implements OnInit {
     this.errProd == true && this.errServ == true ? this.errProdServ = true : this.errProdServ = false;
   }
 
+  verificaTime() {
+    !this.azienda.apertura || !this.azienda.chiusura ? this.errTime = "Inserisci una fascia oraria" : this.errTime = null;
+  }
+
   submit() {
 
-    this.verificaNome();
-    this.verificaToponimo();
-    this.verificaIndirizzo();
-    this.verificaCivico();
+    this.verificaRagioneSociale();
+    this.verificaEmail();
+    // this.verificaToponimo();
+    // this.verificaIndirizzo();
+    // this.verificaCivico();
+     this.verificaIndirizzoCompleto();
     this.verificaCategorie();
     this.verificaProdotti();
     this.verificaServizi();
+    this.verificaTime();
 
-      if(this.errName == null && this.errInd == null  && this.errCiv == null && this.errCat == false && this.errProdServ == false && this.errInd == null){
+      if(this.errRagSoc == null && this.errInd == null  && this.errCiv == null && this.errCat == false && this.errProdServ == false && this.errInd == null  && this.errTime == null){
         this.registra();
     }
 
@@ -153,7 +180,7 @@ export class RegisterComponent implements OnInit {
       },
       (err) =>{
         console.error(err)
-        this.errName = err.error.msg;
+        this.errRagSoc = err.error.msg;
         this.showMsg("error", "C'è stato un problema!", err.error.msg)
 
       }
