@@ -15,6 +15,9 @@ import {MessageService} from 'primeng/api';
 
 import {ToastModule} from 'primeng/toast';
 
+import {FileUploadModule} from 'primeng/fileupload';
+
+
 
 
 
@@ -32,7 +35,8 @@ import {ToastModule} from 'primeng/toast';
     FormsModule,
     MultiSelectModule,
     HttpClientModule,
-    ToastModule
+    ToastModule,
+    FileUploadModule
   
   ],
   providers: [MessageService],

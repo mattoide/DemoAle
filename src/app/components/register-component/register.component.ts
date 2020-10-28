@@ -27,7 +27,9 @@ export class RegisterComponent implements OnInit {
   prodotti = [];
   servizi = [];
   toponimi = [];
+  img = null;
 
+  errImg = null;
   errRagSoc = null;
   errMail = null;
   errProv = null;
@@ -52,10 +54,12 @@ export class RegisterComponent implements OnInit {
 
     this.getOptionsService.getCategorie().subscribe(
       result =>{
-        
-    for (let i = 0; i < result.length; i++) {
-      this.categorie.push({ label: result[i].categoria, value: result[i].categoria });
+
+    for (let i = 0; i < result.categorie.length; i++) {
+      this.categorie.push({ label: result.categorie[i].categoria, value: result.categorie[i].categoria });
     }
+
+
       }, 
       err =>{
         console.log(err)
@@ -65,8 +69,8 @@ export class RegisterComponent implements OnInit {
     this.getOptionsService.getProdotti().subscribe(
       result =>{
         
-    for (let i = 0; i < result.length; i++) {
-      this.prodotti.push({ label: result[i].prodotto, value: result[i].prodotto });
+    for (let i = 0; i < result.prodotti.length; i++) {
+      this.prodotti.push({ label: result.prodotti[i].prodotto, value: result.prodotti[i].prodotto });
     }
       }, 
       err =>{
@@ -77,8 +81,8 @@ export class RegisterComponent implements OnInit {
     this.getOptionsService.getServizi().subscribe(
       result =>{
         
-    for (let i = 0; i < result.length; i++) {
-      this.servizi.push({ label: result[i].servizio, value: result[i].servizio });
+    for (let i = 0; i < result.servizi.length; i++) {
+      this.servizi.push({ label: result.servizi[i].servizio, value: result.servizi[i].servizio });
     }
       }, 
       err =>{
@@ -90,8 +94,8 @@ export class RegisterComponent implements OnInit {
     this.getOptionsService.getToponimi().subscribe(
       result =>{
         
-    for (let i = 0; i < result.length; i++) {
-      this.toponimi.push(result[i].toponimo);
+    for (let i = 0; i < result.toponimi.length; i++) {
+      this.toponimi.push(result.toponimi[i].toponimo);
     }
       }, 
       err =>{
@@ -153,6 +157,23 @@ export class RegisterComponent implements OnInit {
     !this.azienda.apertura || !this.azienda.chiusura ? this.errTime = "Inserisci una fascia oraria" : this.errTime = null;
   }
 
+  verificaImg() {
+    !this.azienda.img ? this.errImg = "Inserisci un'immagine per l' azienda'" : this.errImg = null;
+  }
+
+  createFile(f){
+    this.img = f.files[0]
+    this.azienda.img = this.img
+    console.log(this.azienda.img)
+  }
+
+  
+  removeFile(){
+    this.img = null;
+    this.azienda.img = null
+
+  }
+
   submit() {
 
     this.verificaRagioneSociale();
@@ -176,12 +197,12 @@ export class RegisterComponent implements OnInit {
     this.registerService.registraAzienda(this.azienda).subscribe(
       result =>{
         console.log(result)
-        this.showMsg("success", "Successo!", result)
+        this.showMsg("success", "Successo!", result.message)
       },
       (err) =>{
         console.error(err)
         this.errRagSoc = err.error.msg;
-        this.showMsg("error", "C'è stato un problema!", err.error.msg)
+        this.showMsg("error", "C'è stato un problema!", err.error.message)
 
       }
     )

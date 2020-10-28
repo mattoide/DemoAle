@@ -2,10 +2,10 @@ import { environment } from "../../environments/environment";
 
 export const api = {
 
-    registraAzienda: environment.baseUrl + 'aziende/registraAzienda',
-    getCategorie: environment.baseUrl + 'options/getCategorie',
-    getProdotti: environment.baseUrl + 'options/getProdotti',
-    getServizi: environment.baseUrl + 'options/getServizi',
-    getToponimi: environment.baseUrl + 'options/getToponimi',
+    registraAzienda: environment.baseUrl + 'api/azienda/registra',
+    getCategorie: environment.baseUrl + 'api/options/categorie',
+    getProdotti: environment.baseUrl + 'api/options/prodotti',
+    getServizi: environment.baseUrl + 'api/options/servizi',
+    getToponimi: environment.baseUrl + 'api/options/toponimi',
 
 }

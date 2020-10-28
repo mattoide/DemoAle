@@ -1,4 +1,6 @@
 export class Azienda {
+    img:any
+    imgPath:string
     ragioneSociale:string
     email:string
     cel:string

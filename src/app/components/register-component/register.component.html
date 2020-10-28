@@ -2,7 +2,29 @@
 
   <h3>Registra azienda</h3>
 
+
+
   <div class="container" style="padding: 5%; background-color: whitesmoke; border-style: solid;">
+
+    <div class="form-group">
+      <p-fileUpload name="img[]" url="./upload.php" accept="image/*"
+      chooseLabel="Scegli immagine"
+      mode="advanced"
+      showUploadButton=""
+      customUpload="true"
+      cancelLabel="Elimina"
+      invalidFileTypeMessageSummary="{0}: Tipo di file non valido, "
+      invalidFileTypeMessageDetail="tipi di file permessi: {0}."
+      customUpload="true" 
+      (onSelect)="createFile($event)"
+      (onRemove)="removeFile()"
+      (onClear)="removeFile()"
+      ></p-fileUpload>
+      <div [hidden]="errImg == null" class="alert alert-danger">{{errImg}}</div>
+
+    </div>
+
+
     <div class="form-group">
       <label for="ragioneSociale" class="labels">Ragione sociale</label>
       <input type="text" class="form-control" id="ragioneSociale" required min="3" [(ngModel)]="azienda.ragioneSociale"
